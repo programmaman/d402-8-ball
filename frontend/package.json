@@ -1,0 +1,20 @@
+{
+  "name": "d402-oracle-frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "d402": "file:../../..",
+    "ethers": "^6.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "@vitejs/plugin-basic-ssl": "^2.0.0",
+    "typescript": "^6.0.3",
+    "vite": "^7.0.0"
+  }
+}

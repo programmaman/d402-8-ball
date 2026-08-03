@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A compact browser-wallet d402 AI payment demo." />
+    <title>d402 AI 8-Ball · Local Demo</title>
+  </head>
+  <body>
+    <main class="card">
+      <p class="eyebrow">d402 on Gnosis · Local demo</p>
+      <h1>d402 AI 8-Ball</h1>
+      <p>
+        Connect a wallet, create a tiny native USDS payment, receive a paid response
+        from a local Ollama model, and settle after the response succeeds.
+      </p>
+      <button id="check" type="button">Connect wallet and ask</button>
+      <p id="status" role="status">Ready to connect your wallet.</p>
+
+      <section class="how-it-works">
+        <p class="section-label">What this demonstrates</p>
+        <p>
+          A browser client discovers d402 terms, creates the requisite payment,
+          retries with proof, displays the AI response, and then settles the transaction.
+        </p>
+      </section>
+
+      <section id="result-card" class="result-card" aria-live="polite" hidden>
+        <p class="section-label">Paid AI response</p>
+        <blockquote id="answer"></blockquote>
+        <p id="answer-caption" class="answer-caption"></p>
+        <details class="payment-summary">
+          <summary>d402 payment details</summary>
+          <dl id="payment-details" class="transaction-grid"></dl>
+        </details>
+      </section>
+
+      <section id="transaction-list" aria-live="polite"></section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
