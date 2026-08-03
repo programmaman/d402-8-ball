@@ -15,36 +15,29 @@ the protected server. Use disposable, minimally funded wallets.
 
 ## Prerequisites
 
-- Node.js matching the repository `.nvmrc`
+- Node.js 24 or newer
 - A funded, disposable Gnosis wallet for the browser
 - A funded, disposable Gnosis payee key for the server
 - [Ollama](https://ollama.com/download)
 
 ## Quick start
 
-From the repository root, install the root dependencies and build d402:
+From the repository root, install the frontend dependencies:
 
 ```sh
+cd frontend
 npm install
-npm run build
-```
-
-Install the frontend dependencies:
-
-```sh
-cd demo/container-demo/frontend
-npm install
-cd ../../..
+cd ..
 ```
 
 Create the local server configuration:
 
 ```sh
-cp demo/container-demo/.env.example demo/container-demo/.env
+cp .env.example .env
 ```
 
-Set a disposable funded `PAYEE_PRIVATE_KEY` in
-`demo/container-demo/.env`. Then download and start the model:
+Set a disposable funded `PAYEE_PRIVATE_KEY` in `.env`. Then download and start
+the model:
 
 ```sh
 ollama pull llama3.2:1b
@@ -54,13 +47,13 @@ ollama serve
 In a second terminal, start the protected server:
 
 ```sh
-node --env-file=demo/container-demo/.env --import tsx demo/container-demo/src/server.ts
+node --env-file=.env --import tsx src/server.ts
 ```
 
 In a third terminal, start the frontend on loopback:
 
 ```sh
-cd demo/container-demo/frontend
+cd frontend
 npm run dev -- --host 127.0.0.1
 ```
 
@@ -118,12 +111,11 @@ The successful oracle response is:
 From the repository root:
 
 ```sh
-npm run build
-node --import tsx --test demo/container-demo/test/*.ts
+node --import tsx --test test/*.ts
 npx tsc --ignoreConfig --noEmit --module NodeNext --moduleResolution NodeNext \
   --target ES2024 --types node --skipLibCheck \
-  demo/container-demo/src/*.ts demo/container-demo/test/*.ts
-cd demo/container-demo/frontend && npm run build
+  src/*.ts test/*.ts
+cd frontend && npm run build
 ```
 
 The tests use mocked Ollama responses; they do not spend funds or download a
