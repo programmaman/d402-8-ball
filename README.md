@@ -83,18 +83,24 @@ OLLAMA_URL=http://localhost:11434
 OLLAMA_MODEL=llama3.2:1b
 ```
 
-The browser reads the public d402 terms from `GET /config` and pins the
-challenge's chain, token, payee, resource, amount, expiry window, and settlement
-window in the d402 client policy before creating a transaction. This is part of
-the d402 demonstration, not production deployment hardening.
+The actual d402 payment challenge and its canonical terms come from the initial
+`GET /oracle` response. Before making that request, this demo reads `GET /config`
+only to build a client-side allowlist for the expected chain, token, payee,
+resource, and maximum amount. The d402 client then checks the challenge returned
+by `/oracle` against that allowlist before creating a transaction.
+
+Because `/config` is served by the same server as `/oracle`, it is demo
+configuration rather than an independent trust source or production security
+boundary. A production client should validate challenges against expectations
+configured through a trusted source.
 
 The model receives a fixed prompt. Visitor text is not sent to Ollama.
 
 ## Endpoints
 
 ```text
-GET /config -> public d402 client policy inputs
-GET /oracle -> 402 terms, then paid AI response
+GET /config -> demo allowlist inputs (not a payment challenge)
+GET /oracle -> canonical d402 challenge, then paid AI response
 ```
 
 The successful oracle response is:
