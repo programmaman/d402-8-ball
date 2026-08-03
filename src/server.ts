@@ -137,7 +137,7 @@ function toWebRequest(request: IncomingMessage, url: URL): Request {
   }
 
   return new Request(url, {
-    method: request.method,
+    method: request.method ?? "GET",
     headers,
   });
 }

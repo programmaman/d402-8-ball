@@ -22,9 +22,10 @@ the protected server. Use disposable, minimally funded wallets.
 
 ## Quick start
 
-From the repository root, install the frontend dependencies:
+From the repository root, install the server and frontend dependencies:
 
 ```sh
+npm install
 cd frontend
 npm install
 cd ..
@@ -47,7 +48,7 @@ ollama serve
 In a second terminal, start the protected server:
 
 ```sh
-node --env-file=.env --import tsx src/server.ts
+npm start
 ```
 
 In a third terminal, start the frontend on loopback:
@@ -111,12 +112,6 @@ The successful oracle response is:
 From the repository root:
 
 ```sh
-node --import tsx --test test/*.ts
-npx tsc --ignoreConfig --noEmit --module NodeNext --moduleResolution NodeNext \
-  --target ES2024 --types node --skipLibCheck \
-  src/*.ts test/*.ts
+npm run typecheck
 cd frontend && npm run build
 ```
-
-The tests use mocked Ollama responses; they do not spend funds or download a
-model.
